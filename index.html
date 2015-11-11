@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>test shopping cart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>            
+        <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>   
+        <!-- Bootstrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">       
+        <link rel="stylesheet" href="css/styles.css">        
+    </head>
+    <body ng-app="kaizen" class="container" ng-controller="productsController">
+        <section class="header container">
+            <div class="row">
+                <div class="col-sm-8">
+                   <h1>Catalogue</h1> 
+                </div>
+                <div class="shopping-cart bordered col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="carticon radius bordered">
+                            <i class="fa fa-shopping-cart fa-2x"></i> 
+                            </span>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <span class="col-sm-12 quantity">{{ count }} items </span>
+                                <span class="col-sm-12 price-total"><i class="fa fa-gbp"></i> {{ price }}</span>                                 
+                            </div>                          
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="button" data-toggle="modal" data-target="#myModal"> View cart</button>                             
+                        </div>                        
+                    </div>
+                </div>            
+            </div>            
+        </section>
+        <section>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Shopping Cart</h4>
+                  </div>
+                  <div class="modal-body">
+                        <div class="cart row" ng-repeat="productcart in cart">
+                            <div class="image col-sm-3">
+                                <img src="{{productcart.image_url}}">
+                            </div>
+                            <div class="title col-sm-3">
+                                {{productcart.title}}
+                            </div>
+                            <div class="description col-sm-3">
+                                {{productcart.description}}
+                            </div>
+                            <div class="price col-sm-3">
+                                <div class="row">
+                                    <div class="col-sm-12"><i class="fa fa-gbp"></i> {{productcart.price}}</div>                                         
+                                </div>
+                            </div>              
+                        </div>
+                      <div class="row">
+                          <div class="col-sm-12"></div>
+                          <hr>
+                          <div class="col-sm-9">
+                              <span>Total</span>
+                          </div>
+                          <div>
+                              <span class="price-total"><i class="fa fa-gbp"></i> {{ price }}</span> 
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>            
+        </section>
+        <section class="products container"  >
+            <div class="product row" ng-repeat="product in products.products">
+                <div class="image col-sm-3">
+                    <img src="{{product.image_url}}">
+                </div>
+                <div class="title col-sm-3">
+                    {{product.title}}
+                </div>
+                <div class="description col-sm-3">
+                    {{product.description}}
+                </div>
+                <div class="price col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12"><i class="fa fa-gbp"></i> {{product.price}}</div>
+                        <button ng-click="add(product,product.price,1);"><i class="fa fa-cart-plus"></i> Add to cart</button>                        
+                    </div>
+                </div>              
+            </div>
+        </section>
+        <script src="js/controller.js"></script>         
+    </body>
+</html>
